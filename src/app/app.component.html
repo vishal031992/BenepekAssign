@@ -1,0 +1,95 @@
+<div class="container-fluid" *ngIf="isLoading">
+  <div class="row">
+    <div class="col col-xs-12 col-sm-6 col-md-4 col-lg-3" *ngFor="let list of allImages"
+      style="padding:8px;cursor: pointer;">
+      <div class="card" (click)="open(list)">
+        <img [src]="list.Images" class="image" style="margin-left: 69px;">
+        <div style="margin-left: 67px;">
+          <p class="launchDetail"><b>Created Date: </b>
+            <n style=" color: #00008ba3;font-size: 11px;">{{list.created_date}}</n>
+          </p>
+          <p class="launchDetail"> <b>News Icon: </b>
+            <n style=" color: #00008ba3;font-size: 11px;"> <img [src]="list.newsIcon" style="width:12px"></n>
+          </p>
+          <p class="launchDetail"><b>Post Title: </b>
+            <n style=" color: #00008ba3;font-size: 11px;cursor: pointer;" title={{list.post_title}}>
+              {{list.post_title.length > 30 ?
+              list.post_title.substring(0,30) + '...': list.post_title}}</n>
+          </p>
+          <p class="launchDetail"><b>Total Comments: </b>
+            <n style=" color: #00008ba3;font-size: 11px;">{{list.totalComment}}</n>
+          </p>
+          <p class="launchDetail"><b>Total Likes: </b>
+            <n style=" color: #00008ba3;font-size: 11px;">{{list.totalLike}}</n>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div *ngIf="!isLoading" class="loader"></div>
+
+<div *ngIf="openDialog" class="dialog1 gray_bg dialog">
+  <div class="content">
+    <div class="inner" style="height: 364px;">
+      <div *ngFor="let list of allVideos" style="padding:8px;cursor: pointer;">
+        <div class="card col-sm-6" (click)="open(list)">
+          <!-- <img [src]="list.Images" class="image"> -->
+          <!-- <video width="420" height="315" [src]="list.post_image"></video> -->
+          <video autoplay width="420" height="315" [poster]="list.post_image" controls #videoPlayer>
+            <source [src]="list.post_image" type="video/mp4" />
+
+          </video>
+
+          <div class="container">
+          </div>
+        </div>
+        <div class="col-sm-6" style="margin-top:33px">
+          <p class="launchDetail"><b>Post Title: </b>
+            <n style=" color: #00008ba3;font-size: 11px;">{{list.post_title}}</n>
+          </p>
+          <p class="launchDetail"><b>Report Message: </b>
+            <n style=" color: #00008ba3;font-size: 11px;cursor: pointer;" title={{list.submittedReportMessage}}>
+              {{list.submittedReportMessage.length > 30 ?
+              list.submittedReportMessage.substring(0,30) + '...': list.submittedReportMessage}}</n>
+          </p>
+          <p class="launchDetail"><b>Reporting Status:</b>
+            <n style=" color: #00008ba3;font-size: 11px;">{{list.reportingStatus}}</n>
+          </p>
+          <p class="launchDetail"><b>Show Report:</b>
+            <n style=" color: #00008ba3;font-size: 11px;">{{list.showReport}}</n>
+          </p>
+          <p class="launchDetail"><b>Created Date: </b>
+            <n style=" color: #00008ba3;font-size: 11px;">{{list.created_date}}</n>
+          </p>
+          <p class="launchDetail"> <b>Thumb Image: </b>
+            <n style=" color: #00008ba3;font-size: 11px;"> <img [src]="list.post_thumb_image" style="width:32px"></n>
+          </p>
+          <p class="launchDetail"> <b>Liked Image: </b>
+            <n style=" color: #00008ba3;font-size: 11px;"> <img [src]="list.likedImage" style="width:32px"></n>
+          </p>
+
+          <p class="launchDetail"><b>Comment: </b>
+            <n style=" color: #00008ba3;font-size: 11px;cursor: pointer;" title={{list.commentMessage}}>
+              {{list.commentMessage.length > 30 ?
+              list.commentMessage.substring(0,30) + '...': list.commentMessage}}</n>
+          </p>
+
+
+        </div>
+      </div>
+      <div>
+        <div class="modal-footer input_box" style="padding-bottom: 0;padding-right:0;border-top:none;cursor: pointer;">
+          <!-- <button style="cursor: pointer" [disabled]="!openDialogForm.form.valid || !openDialogForm.form.dirty"
+            (click)="addOrEditHub();openDialog = false" mat-raised-button color="primary"
+            class="submit common_button">Submit</button> -->
+
+          <button style="cursor: pointer" type="button" class="btn standard_btn cancel common_button"
+            style=" margin-top: 55px;" (click)="openDialog = false">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
